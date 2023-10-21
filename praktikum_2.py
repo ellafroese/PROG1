@@ -73,7 +73,6 @@ def blood_vellesl_overlap():
     for v in vessels:
         # Manhattan Distance
         distance = max(abs(v[0][0] - v[1][0]), abs(v[0][1] - v[1][1]))
-        print(distance)
 
         start_point_vessel = v[0]
         end_point_vessel = v[1]
