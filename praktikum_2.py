@@ -76,22 +76,25 @@ def blood_vellesl_overlap():
 
         start_point_vessel = v[0]
         end_point_vessel = v[1]
+
+        x_direction = 0
+        y_direction = 0
+
+        if start_point_vessel[0] < end_point_vessel[0]:
+            x_direction = 1
+        elif start_point_vessel[0] > end_point_vessel[0]:
+            x_direction = -1
+        if start_point_vessel[1] < end_point_vessel[1]:
+            y_direction = 1
+        elif start_point_vessel[1] > end_point_vessel[1]:
+            y_direction = -1
+
         x = v[0][0]
         y = v[0][1]
-        x_dir = 0
-        y_dir = 0
-        if start_point_vessel[0] < end_point_vessel[0]:
-            x_dir = 1
-        elif start_point_vessel[0] > end_point_vessel[0]:
-            x_dir = -1
-        if start_point_vessel[1] < end_point_vessel[1]:
-            y_dir = 1
-        elif start_point_vessel[1] > end_point_vessel[1]:
-            y_dir = -1
         for i in range(distance):
             diagram[y][x] += 1
-            x += x_dir
-            y += y_dir
+            x += x_direction
+            y += y_direction
 
     print("Vessel representation:")
     for i in diagram:
