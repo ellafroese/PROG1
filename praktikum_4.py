@@ -120,5 +120,7 @@ def start_p4():
         ssn = input("\nPlease enter your patients SSN: ")
         if ssn in indexed_data:
             analyze_patient(ssn, indexed_data)
+        else:
+            print("Patient not found.")
     else:
         print("Goodbye :)")
