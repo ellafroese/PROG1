@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 
 # File path
 filename = 'patient_records.csv'
@@ -26,15 +27,51 @@ def view_patient_records(records):
         print(f"Patient ID: {patient_id}, Name: {name}, Date of Birth: {dob}, Height: {height}, Weight: {weight}")
 
 
+
 def add_patient_record(records):
     # Implement adding a new patient record
     print("Adding a new patient record:")
     new_record = {}
-    new_record['Patient ID'] = input("Enter Patient ID: ")
-    new_record['Name'] = input("Enter Name: ")
-    new_record['Date of Birth'] = input("Enter Date of Birth: ")
-    new_record['Height'] = input("Enter Height: ")
-    new_record['Weight'] = input("Enter Weight: ")
+    while True:
+        try:
+            new_record['Patient ID'] = int(input("Enter Patient ID (numbers only): "))
+            # Check if the Patient ID already exists
+            for record in records:
+                if record['Patient ID'] == str(new_record['Patient ID']):
+                    print("Patient ID already exists. Please enter a different Patient ID.")
+                    return
+
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid number for Patient ID.")
+
+    new_record['Name'] = input("Enter Name (letters only): ")
+    while not new_record['Name'].isalpha():
+        print("Invalid input. Name should only contain letters.")
+        new_record['Name'] = input("Enter Name (letters only): ")
+
+    while True:
+        try:
+            new_record['Date of Birth'] = input("Enter Date of Birth (YYYY-MM-DD): ")
+            datetime.strptime(new_record['Date of Birth'], "%Y-%m-%d")
+            break
+        except ValueError:
+            print("Invalid date format. Please enter date in YYYY-MM-DD format.")
+
+    while True:
+        try:
+            new_record['Height'] = float(input("Enter Height (numbers only): "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid number for Height.")
+
+    while True:
+        try:
+            new_record['Weight'] = float(input("Enter Weight (numbers only): "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid number for Weight.")
+
     records.append(new_record)
     print("Patient record added successfully.")
 
