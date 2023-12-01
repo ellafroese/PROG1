@@ -1,7 +1,6 @@
 import csv
 from datetime import datetime
 
-# File path
 filename = 'patient_records.csv'
 
 
@@ -16,14 +15,12 @@ def read_patient_records(filename):
 
 def view_patient_records(records):
     for row in records:
-        # Access data by column names
         patient_id = row['Patient ID']
         name = row['Name']
         dob = row['Date of Birth']
         height = row['Height']
         weight = row['Weight']
 
-        # Process or perform actions with the data
         print(f"Patient ID: {patient_id}, Name: {name}, Date of Birth: {dob}, Height: {height}, Weight: {weight}")
 
 
