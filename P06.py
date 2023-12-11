@@ -39,8 +39,6 @@ def get_patients_by_blood_group(connection, blood_group):
         cursor.execute("SELECT * FROM patients AS p JOIN blood_groups AS b ON p.blood_group_id = b.id WHERE b.type = %s", (blood_group,))
         return cursor.fetchall()
 
-
-{'name': 'Obi-Wan Kenobi', 'age': 57, 'planet': 'Stewjon', 'blood_group': 'A+'},
 def insert_patient(connection, name, age, planet, blood_group):
     # Fetch the blood group ID based on the type
     with connection.cursor() as cursor:
@@ -51,13 +49,16 @@ def insert_patient(connection, name, age, planet, blood_group):
             blood_group_id = result[0]  # Extracting the blood group ID
             # Insert the patient with the fetched blood_group_id
             cursor.execute(
-                "INSERT INTO patients (name, age, blood_group_id, planet) VALUES (%s, %s, %s, %s)",
+                "INSERT INTO patients (name, age, blood_group_id, planet) VALUES (%s, %s, %s, %s) RETURNING id",
                 (name, age, blood_group_id, planet)
             )
             connection.commit()
+            inserted_patient_id = cursor.fetchone()[0]  # Fetch the inserted patient ID
             print("Patient inserted successfully!")
+            return inserted_patient_id  # Return the inserted patient ID
         else:
             print(f"Blood group '{blood_group}' not found.")
+            return None
 
 
 
