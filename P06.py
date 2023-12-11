@@ -4,10 +4,10 @@ import psycopg2
 
 
 # Establish connection parameters
-hostname = 'localhost'
-username = 'postgres'
-password = 'postgres'
-database = 'starwars_medical'
+hostname = 'myconnection'
+username = 'myconnection'
+password = 'myconnection'
+database = 'myconnection'
 
 # Establish a connection
 host=hostname,
